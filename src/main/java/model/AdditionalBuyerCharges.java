@@ -53,6 +53,13 @@ public class AdditionalBuyerCharges {
   @SerializedName(SERIALIZED_NAME_RENT_SURCHARGE_AMOUNT)
   private BigDecimal rentSurchargeAmount;
 
+  // CUSTOM PATCH: Added until Finix SDK includes surcharge_amount.
+
+  public static final String SERIALIZED_NAME_SURCHARGE_AMOUNT = "surcharge_amount";
+
+  @SerializedName(SERIALIZED_NAME_SURCHARGE_AMOUNT)
+  private BigDecimal surchargeAmount;
+
   public AdditionalBuyerCharges() { 
   }
 
@@ -60,6 +67,28 @@ public class AdditionalBuyerCharges {
     
     this.convenienceAmount = convenienceAmount;
     return this;
+  }
+
+  public AdditionalBuyerCharges surchargeAmount(BigDecimal surchargeAmount) {
+
+    this.surchargeAmount = surchargeAmount;
+    return this;
+  }
+
+  /**
+   * Include the surcharge the merchant is charging the buyer
+   * when creating a `Transfer` or an `Authorization`.
+   */
+  @javax.annotation.Nullable
+  @ApiModelProperty(
+      value = "Include the surcharge the merchant is charging the buyer for the transaction when creating a `Transfer` or an `Authorization`."
+  )
+  public BigDecimal getSurchargeAmount() {
+      return surchargeAmount;
+  }
+
+  public void setSurchargeAmount(BigDecimal surchargeAmount) {
+    this.surchargeAmount = surchargeAmount;
   }
 
    /**
@@ -112,8 +141,9 @@ public class AdditionalBuyerCharges {
       return false;
     }
     AdditionalBuyerCharges additionalBuyerCharges = (AdditionalBuyerCharges) o;
-    return Objects.equals(this.convenienceAmount, additionalBuyerCharges.convenienceAmount) &&
-        Objects.equals(this.rentSurchargeAmount, additionalBuyerCharges.rentSurchargeAmount);
+    return Objects.equals(this.convenienceAmount, additionalBuyerCharges.convenienceAmount)
+    && Objects.equals(this.surchargeAmount, additionalBuyerCharges.surchargeAmount)
+    && Objects.equals(this.rentSurchargeAmount, additionalBuyerCharges.rentSurchargeAmount);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -122,8 +152,9 @@ public class AdditionalBuyerCharges {
 
   @Override
   public int hashCode() {
-    return Objects.hash(convenienceAmount, rentSurchargeAmount);
+    return Objects.hash(convenienceAmount, surchargeAmount, rentSurchargeAmount);
   }
+  
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
     if (a == null) {
@@ -137,9 +168,11 @@ public class AdditionalBuyerCharges {
     StringBuilder sb = new StringBuilder();
     sb.append("class AdditionalBuyerCharges {\n");
     sb.append("    convenienceAmount: ").append(toIndentedString(convenienceAmount)).append("\n");
+    sb.append("    surchargeAmount: ").append(toIndentedString(surchargeAmount)).append("\n");
     sb.append("    rentSurchargeAmount: ").append(toIndentedString(rentSurchargeAmount)).append("\n");
     sb.append("}");
     return sb.toString();
+    
   }
 
   /**
@@ -161,6 +194,7 @@ public class AdditionalBuyerCharges {
     // a set of all properties/fields (JSON key names)
     openapiFields = new HashSet<String>();
     openapiFields.add("convenience_amount");
+    openapiFields.add("surcharge_amount");
     openapiFields.add("rent_surcharge_amount");
 
     // a set of required properties/fields (JSON key names)
