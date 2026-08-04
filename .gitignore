@@ -21,3 +21,4 @@ target
 build
 # Ignore .idea dir to push @git
 .idea
+gradle.properties

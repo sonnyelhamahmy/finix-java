@@ -86,14 +86,29 @@ if(hasProperty('target') && target == 'android') {
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
 
-    publishing {
-        publications {
-            maven(MavenPublication) {
-               artifactId = 'finix-java'
-               from components.java
+   publishing {
+    publications {
+        gpr(MavenPublication) {
+            groupId = project.group
+            artifactId = "finix-java"
+            version = project.version
+
+            from components.java
+        }
+    }
+
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/sonnyelhamahmy/finix-java")
+
+            credentials {
+                username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_USERNAME")
+                password = project.findProperty("gpr.key") ?: System.getenv("GITHUB_TOKEN")
             }
         }
     }
+}
 
     task execute(type:JavaExec) {
        main = System.getProperty('mainClass')
@@ -117,8 +132,17 @@ dependencies {
     implementation 'org.openapitools:jackson-databind-nullable:0.2.2'
     implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.12.0'
     implementation "jakarta.annotation:jakarta.annotation-api:$jakarta_annotation_version"
+    
+     // Lombok
+    compileOnly 'org.projectlombok:lombok:1.18.38'
+    annotationProcessor 'org.projectlombok:lombok:1.18.38'
+
+    testCompileOnly 'org.projectlombok:lombok:1.18.38'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.38'
+
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
     testImplementation 'org.mockito:mockito-core:3.12.4'
+    
 }
 
 javadoc {
