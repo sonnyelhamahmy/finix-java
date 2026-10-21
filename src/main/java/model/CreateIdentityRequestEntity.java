@@ -64,6 +64,20 @@ public class CreateIdentityRequestEntity {
   @SerializedName(SERIALIZED_NAME_PHONE)
   private String phone;
 
+  @SerializedName("business_name")
+  private String businessName;
+  @SerializedName("doing_business_as")
+  private String doingBusinessAs;
+  @SerializedName("business_address")
+  private CreateIdentityRequestEntityPersonalAddress businessAddress;
+
+  public String getBusinessName() { return businessName; }
+  public void setBusinessName(String value) { this.businessName = value; }
+  public String getDoingBusinessAs() { return doingBusinessAs; }
+  public void setDoingBusinessAs(String value) { this.doingBusinessAs = value; }
+  public CreateIdentityRequestEntityPersonalAddress getBusinessAddress() { return businessAddress; }
+  public void setBusinessAddress(CreateIdentityRequestEntityPersonalAddress value) { this.businessAddress = value; }
+
   public CreateIdentityRequestEntity() { 
   }
 
@@ -192,7 +206,10 @@ public class CreateIdentityRequestEntity {
       return false;
     }
     CreateIdentityRequestEntity createIdentityRequestEntity = (CreateIdentityRequestEntity) o;
-    return Objects.equals(this.email, createIdentityRequestEntity.email) &&
+    return Objects.equals(this.businessName, createIdentityRequestEntity.businessName) &&
+        Objects.equals(this.doingBusinessAs, createIdentityRequestEntity.doingBusinessAs) &&
+        Objects.equals(this.businessAddress, createIdentityRequestEntity.businessAddress) &&
+        Objects.equals(this.email, createIdentityRequestEntity.email) &&
         Objects.equals(this.firstName, createIdentityRequestEntity.firstName) &&
         Objects.equals(this.lastName, createIdentityRequestEntity.lastName) &&
         Objects.equals(this.personalAddress, createIdentityRequestEntity.personalAddress) &&
@@ -201,13 +218,16 @@ public class CreateIdentityRequestEntity {
 
   @Override
   public int hashCode() {
-    return Objects.hash(email, firstName, lastName, personalAddress, phone);
+    return Objects.hash(email, firstName, lastName, personalAddress, phone, businessName, doingBusinessAs, businessAddress);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class CreateIdentityRequestEntity {\n");
+    sb.append("    businessName: ").append(toIndentedString(businessName)).append("\n");
+    sb.append("    doingBusinessAs: ").append(toIndentedString(doingBusinessAs)).append("\n");
+    sb.append("    businessAddress: ").append(toIndentedString(businessAddress)).append("\n");
     sb.append("    email: ").append(toIndentedString(email)).append("\n");
     sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
     sb.append("    lastName: ").append(toIndentedString(lastName)).append("\n");
