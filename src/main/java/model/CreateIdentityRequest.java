@@ -61,6 +61,19 @@ public class CreateIdentityRequest {
   @SerializedName(SERIALIZED_NAME_TAGS)
   private Map<String, String> tags = null;
 
+  /** Finix identity roles; RECIPIENT is required for vendor payouts. */
+  public static final String SERIALIZED_NAME_IDENTITY_ROLES = "identity_roles";
+  @SerializedName(SERIALIZED_NAME_IDENTITY_ROLES)
+  private List<String> identityRoles;
+
+  public CreateIdentityRequest identityRoles(List<String> roles) {
+    this.identityRoles = roles;
+    return this;
+  }
+
+  public List<String> getIdentityRoles() { return identityRoles; }
+  public void setIdentityRoles(List<String> roles) { this.identityRoles = roles; }
+
   public CreateIdentityRequest() { 
   }
 
@@ -153,7 +166,8 @@ public class CreateIdentityRequest {
     CreateIdentityRequest createIdentityRequest = (CreateIdentityRequest) o;
     return Objects.equals(this.additionalUnderwritingData, createIdentityRequest.additionalUnderwritingData) &&
         Objects.equals(this.entity, createIdentityRequest.entity) &&
-        Objects.equals(this.tags, createIdentityRequest.tags);
+        Objects.equals(this.tags, createIdentityRequest.tags) &&
+        Objects.equals(this.identityRoles, createIdentityRequest.identityRoles);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -162,7 +176,7 @@ public class CreateIdentityRequest {
 
   @Override
   public int hashCode() {
-    return Objects.hash(additionalUnderwritingData, entity, tags);
+    return Objects.hash(additionalUnderwritingData, entity, tags, identityRoles);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -179,6 +193,7 @@ public class CreateIdentityRequest {
     sb.append("    additionalUnderwritingData: ").append(toIndentedString(additionalUnderwritingData)).append("\n");
     sb.append("    entity: ").append(toIndentedString(entity)).append("\n");
     sb.append("    tags: ").append(toIndentedString(tags)).append("\n");
+    sb.append("    identityRoles: ").append(toIndentedString(identityRoles)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -203,6 +218,7 @@ public class CreateIdentityRequest {
     openapiFields = new HashSet<String>();
     openapiFields.add("additional_underwriting_data");
     openapiFields.add("entity");
+    openapiFields.add("identity_roles");
     openapiFields.add("tags");
 
     // a set of required properties/fields (JSON key names)

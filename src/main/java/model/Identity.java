@@ -83,6 +83,13 @@ public class Identity {
   @SerializedName(SERIALIZED_NAME_LINKS)
   private IdentityLinks links;
 
+  public static final String SERIALIZED_NAME_IDENTITY_ROLES = "identity_roles";
+  @SerializedName(SERIALIZED_NAME_IDENTITY_ROLES)
+  private List<String> identityRoles;
+
+  public List<String> getIdentityRoles() { return identityRoles; }
+  public void setIdentityRoles(List<String> roles) { this.identityRoles = roles; }
+
   public Identity() { 
   }
 
@@ -354,6 +361,7 @@ public class Identity {
     openapiFields.add("additional_underwriting_data");
     openapiFields.add("application");
     openapiFields.add("entity");
+    openapiFields.add("identity_roles");
     openapiFields.add("tags");
     openapiFields.add("_links");
 
